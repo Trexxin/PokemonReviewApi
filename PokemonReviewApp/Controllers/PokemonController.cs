@@ -18,6 +18,7 @@ namespace PokemonReviewApp.Controllers
             _pokemonRepository = pokemonRepository;
             _mapper = mapper;
         }
+
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Pokemon>))]
         public IActionResult GetPokemons()
