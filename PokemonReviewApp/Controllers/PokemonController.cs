@@ -38,7 +38,7 @@ namespace PokemonReviewApp.Controllers
             if (!_pokemonRepoitory.PokemonExists(pokeId))
                 return NotFound();
 
-            var pokemon = _mapper.Map<Pokemon>(_pokemonRepoitory.GetPokemon(pokeId));
+            var pokemon = _mapper.Map<PokemonDto>(_pokemonRepoitory.GetPokemon(pokeId));
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
