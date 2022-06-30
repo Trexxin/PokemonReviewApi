@@ -47,7 +47,7 @@ namespace PokemonReviewApp.Controllers
             return Ok(review);
         }
 
-        [HttpGet("pokemon/{pokeId")]
+        [HttpGet("pokemon/{pokeId}")]
         [ProducesResponseType(200, Type = typeof(Review))]
         [ProducesResponseType(400)]
         public IActionResult GetReviewsForAPokemon(int pokeId)
