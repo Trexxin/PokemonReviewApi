@@ -137,7 +137,7 @@ namespace PokemonReviewApp.Controllers
 
             if (!_reviewerRepository.DeleteReviewer(reviewerToDelete))
             {
-                ModelState.AddModelError("", "Something went wrong deleting category");
+                ModelState.AddModelError("", "Something went wrong deleting reviewer");
             }
 
             return NoContent();
