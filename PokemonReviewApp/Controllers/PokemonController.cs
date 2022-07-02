@@ -12,13 +12,13 @@ namespace PokemonReviewApp.Controllers
     {
         private readonly IPokemonRepository _pokemonRepository;
         private readonly IMapper _mapper;
-        private readonly IReviewerRepository _reviewerRepository;
+        private readonly IReviewRepository _reviewRepository;
 
-        public PokemonController(IPokemonRepository pokemonRepository, IMapper mapper, IReviewerRepository reviewerRepository)
+        public PokemonController(IPokemonRepository pokemonRepository, IMapper mapper, IReviewRepository reviewRepository)
         {
             _pokemonRepository = pokemonRepository;
             _mapper = mapper;
-            _reviewerRepository = reviewerRepository;
+            _reviewRepository = reviewRepository;
         }
 
         [HttpGet]
@@ -124,22 +124,28 @@ namespace PokemonReviewApp.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{pokemonId}")]
+        [HttpDelete("{pokeId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult DeletePokemon(int pokemonId)
+        public IActionResult DeletePokemon(int pokeId)
         {
-            if (!_pokemonRepository.PokemonExists(pokemonId))
+            if (!_pokemonRepository.PokemonExists(pokeId))
             {
                 return NotFound();
             }
 
-            var pokemonToDelete = _pokemonRepository.GetPokemon(pokemonId);
+            var reviewsToDelete = _reviewRepository.GetReviewsOfAPokemon(pokeId);
+
+            var pokemonToDelete = _pokemonRepository.GetPokemon(pokeId);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (!_reviewRepository.DeleteReviews(reviewsToDelete.ToList()))
+            {
+                ModelState.AddModelError("", "Somthing went wrong when deleting reviews");
+            }
             if (!_pokemonRepository.DeletePokemon(pokemonToDelete))
             {
                 ModelState.AddModelError("", "Something went wrong deleting pokemon");
