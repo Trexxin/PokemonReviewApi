@@ -1,5 +1,5 @@
 # PokemonReviewApi
-An api for reviewing pokemons and their owners using Asp.net, Entity Framwork, and Swagger. The api grants the ability to get, put, update, and delete entities with a script to seed a starter database.
+An api for reviewing pokemons and their owners using Asp.net, Entity Framework, and Swagger. The api grants the ability to get, put, update, and delete entities with a script to seed a starter database.
 
 ![Screenshot 2022-07-04 134624](https://user-images.githubusercontent.com/52933202/177205534-67247dd2-e247-4ee4-8602-281302d8af41.jpg)
 
